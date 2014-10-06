@@ -49,9 +49,22 @@ void World::update_from_input()
     }
 }
 
-void World::update_from_collision()
-{
+void World::update_from_collision() {
     BoxShape ball_next(ball.next_x, ball.next_y, ball.width, ball.height);
+
+    if (ball_next.x < 0)
+    {
+        right_points++;
+        ball.initialize_ball();
+        return;
+    }
+
+    if (ball_next.x >= _world_width)
+    {
+        left_points++;
+        ball.initialize_ball();
+        return;
+    }
 
     if (ball_next.y < 0)
     {

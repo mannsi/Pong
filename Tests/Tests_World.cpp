@@ -198,6 +198,21 @@ TEST(WorldTest, no_collision_because_stick_moves_away)
     ASSERT_EQ(mock_world.ball.y, ball_y + ball_speed_y) << "Ball should move on because stick just moved away";
 }
 
+TEST(WorldTest, point_scored_right_side)
+{
+    setup();
+
+    ball_y = 1;
+    ball_x = world_width - 1;
+    right_stick_y = stick_top_position;
+
+    World mock_world = run_one_world_loop();
+    ASSERT_EQ(mock_world.right_points, 0) << "No points scored by right";
+    ASSERT_EQ(mock_world.left_points, 1) << "Left has scored once";
+    ASSERT_EQ(mock_world.ball.x, ball_x) << "A point was scored so ball should go back to initial position";
+    ASSERT_EQ(mock_world.ball.y, ball_y) << "A point was scored so ball should go back to initial position";
+}
+
 TEST(WorldTest, point_scored_left_side)
 {
     setup();
@@ -208,10 +223,10 @@ TEST(WorldTest, point_scored_left_side)
     left_stick_y = stick_top_position;
 
     World mock_world = run_one_world_loop();
-    ASSERT_EQ(mock_world.left_points, 1) << "First point for left";
-    ASSERT_EQ(mock_world.right_points, 1) << "No points scored by right";
-    ASSERT_EQ(mock_world.ball.x, ball_initial_x) << "A point was scored so ball should go back to initial position";
-    ASSERT_EQ(mock_world.ball.y, ball_initial_y) << "A point was scored so ball should go back to initial position";
+    ASSERT_EQ(mock_world.right_points, 1) << "First point for right";
+    ASSERT_EQ(mock_world.left_points, 0) << "No points scored by left";
+    ASSERT_EQ(mock_world.ball.x, ball_x) << "A point was scored so ball should go back to initial position";
+    ASSERT_EQ(mock_world.ball.y, ball_y) << "A point was scored so ball should go back to initial position";
 }
 
 void setup()

@@ -1,7 +1,3 @@
-# TODO How can I not include a list of all my source files in Tests/CMakeLists.txt ? I don't think they should be listed at all there.
-# TODO How can I have the Pong project run all the tests every time it runs/builds ?
-# TODO Would be nice to get rid of boost dependency
-
 cmake_minimum_required(VERSION 2.8.4)
 project(Pong)
 
