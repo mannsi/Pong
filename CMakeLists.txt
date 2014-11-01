@@ -14,13 +14,3 @@ find_package(GLUT REQUIRED) # Followed http://freeglut.sourceforge.net/docs/inst
 find_package(GLEW REQUIRED) # http://glew.sourceforge.net/ Download and sudo make, sudo make install. After that I had to add /usr/lib64/ to /etc/ld.so.conf and run sudo ldconfig
 include_directories(${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS})
 target_link_libraries(Pong ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${GLEW_LIBRARIES})
-
-
-#Boost
-# sudo apt-get install libboost1.55-all-dev
-#find_package(Boost 1.55.0 REQUIRED COMPONENTS system date_time thread)
-#if(Boost_FOUND)
-#    include_directories(${Boost_INCLUDE_DIRS})
-#    target_link_libraries(Pong ${Boost_LIBRARIES})
-#endif()
-
