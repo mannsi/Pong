@@ -19,7 +19,8 @@ static const int ball_initial_x = world_width / 2;
 static const int ball_initial_y = world_height / 2;
 static const int ball_width = 10;
 static const int ball_height = 10;
-static const int ball_step_size = 1;
+static const int ball_x_speed = 1;
+static const int ball_y_speed = 1;
 static const int stick_step_size = 1;
 static const int stick_height = 100;
 static const int stick_width = 20;
@@ -262,7 +263,7 @@ World get_mock_world(std::vector<char> key_presses,
     int right_stick_x,
     int right_stick_y)
 {
-    Ball ball = Ball(ball_x, ball_y, ball_width, ball_height, ball_step_size, ball_speed_x, ball_speed_y);
+    Ball ball = Ball(ball_x, ball_y, ball_width, ball_height, ball_speed_x, ball_speed_y);
     Stick left_stick = Stick(left_stick_x, left_stick_y, stick_width, stick_height, stick_step_size, world_height);
     Stick right_stick = Stick(right_stick_x, right_stick_y, stick_width, stick_height, stick_step_size, world_height);
     World world(ball, left_stick, right_stick, world_height, world_width, mapping);
