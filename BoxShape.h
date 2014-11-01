@@ -4,13 +4,13 @@
 class BoxShape
 {
 public:
-    int x;
-    int y;
-    int width;
-    int height;
+    float x;
+    float y;
+    float width;
+    float height;
 
     BoxShape(){};
-    BoxShape(int x, int y, int width, int height)
+    BoxShape(float x, float y, float width, float height)
         : x(x)
         , y(y)
         , width(width)

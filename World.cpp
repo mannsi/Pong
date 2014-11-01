@@ -4,33 +4,36 @@
 
 using namespace std;
 
-
 void World::run_world_loop()
 {
-    cout << "Run world loop" << endl;
+    //cout << "Run world loop" << endl;
     update_world();
-    draw_world();
-
 }
 
-void World::draw_world()
+void World::key_pressed(char key)
 {
-    // TODO
+    if (key == _keyMapping.LeftMoveDownKey)
+        commands.push_back(LeftMoveDown);
+    else if (key == _keyMapping.LeftMoveUpKey)
+        commands.push_back(LeftMoveUp);
+    else if (key == _keyMapping.RightMoveDownKey)
+        commands.push_back(RightMoveDown);
+    else if (key == _keyMapping.RightMoveUpKey)
+        commands.push_back(RightMoveUp);
 }
 
 void World::update_world()
 {
     ball.calculate_next_step();
-    update_from_input();
+    update_from_commands();
     update_from_collision();
     ball.update_location();
 }
 
-void World::update_from_input()
-{
-    std::vector<Command> list_of_input_commands = (*input).get_list_of_commands();
-    for (int i = 0; i < list_of_input_commands.size() ; ++i) {
-        Command command = list_of_input_commands[i];
+void World::update_from_commands()
+{;
+    for (int i = 0; i < commands.size() ; ++i) {
+        Command command = (Command)commands[i];
         switch (command)
         {
             case LeftMoveDown:
@@ -47,6 +50,7 @@ void World::update_from_input()
                 break;
         }
     }
+    commands.clear();
 }
 
 void World::update_from_collision() {
@@ -59,7 +63,7 @@ void World::update_from_collision() {
         return;
     }
 
-    if (ball_next.x >= _world_width)
+    if (ball_next.x + ball_next.width > world_width)
     {
         left_points++;
         ball.initialize_ball();
@@ -73,11 +77,11 @@ void World::update_from_collision() {
         ball_next.y = 0; // For stick collision detection
     }
 
-    if (ball_next.y > _world_height - 1) // Negative 1 because we measure the ball from the bottom left coordinate
+    if (ball_next.y > world_height - ball.height)
     {
         ball.reverse_y_speed();
         ball.calculate_next_step();
-        ball_next.y = _world_height - 1; // For stick collision detection
+        ball_next.y = world_height - 1; // For stick collision detection
     }
 
     // Collision between ball and sticks

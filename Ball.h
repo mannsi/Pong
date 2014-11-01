@@ -6,7 +6,6 @@
 class Ball: public BoxShape
 {
 private:
-    int _step_size;
     int _speed_x;
     int _speed_y;
     int _initial_x;
@@ -20,13 +19,11 @@ public:
             int y,
             int width,
             int height,
-            int step_size,
             int speed_x,
             int speed_y)
         : BoxShape(x, y, width, height)
         , _initial_x(x)
         , _initial_y(y)
-        , _step_size(step_size)
         , _speed_x(speed_x)
         , _speed_y(speed_y)
     { };
