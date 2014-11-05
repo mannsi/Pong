@@ -1,7 +1,9 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <iostream>
+#include <math.h>
 #include "OpenGlUi.h"
+
 
 using namespace std;
 
@@ -9,6 +11,7 @@ void update(int value);
 void enable2D(int width, int height);
 void drawText(float x, float y, std::string text);
 void drawRect(BoxShape rect);
+void drawCircle(float x, float y, float r, int segments);
 void KeyPressed(unsigned char, int, int);
 void KeyUp(unsigned char, int, int);
 void KeyOperations();;
@@ -85,8 +88,11 @@ void draw_right_stick(World world) {
 }
 
 void draw_ball(World world) {
-    BoxShape screen_ball = world_object_to_screen_object(world.ball);
-    drawRect(screen_ball);
+    BoxShape screen_ball_rect = world_object_to_screen_object(world.ball);
+    float ball_center_x = screen_ball_rect.x + screen_ball_rect.width/2;
+    float ball_center_y = screen_ball_rect.y + screen_ball_rect.height/2;
+    float ball_radius = screen_ball_rect.width/2;
+    drawCircle(ball_center_x, ball_center_y, ball_radius, 100);
 }
 
 void draw_score(World world) {
@@ -133,6 +139,17 @@ void drawRect(BoxShape rect) {
     glVertex2f(rect.x + rect.width, rect.y);
     glVertex2f(rect.x + rect.width, rect.y + rect.height);
     glVertex2f(rect.x, rect.y + rect.height);
+    glEnd();
+}
+
+void drawCircle(float x, float y, float r, int segments)
+{
+    glBegin( GL_TRIANGLE_FAN );
+    glVertex2f(x, y);
+    for( int n = 0; n <= segments; ++n ) {
+        float const t = 2*M_PI*(float)n/(float)segments;
+        glVertex2f(x + sin(t)*r, y + cos(t)*r);
+    }
     glEnd();
 }
 
