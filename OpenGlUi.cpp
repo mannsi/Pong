@@ -2,8 +2,9 @@
 #include <GL/freeglut.h>
 #include <iostream>
 #include <math.h>
+#include <string>
 #include "OpenGlUi.h"
-
+#include "Constants.h"
 
 using namespace std;
 
@@ -147,7 +148,7 @@ void drawCircle(float x, float y, float r, int segments)
     glBegin( GL_TRIANGLE_FAN );
     glVertex2f(x, y);
     for( int n = 0; n <= segments; ++n ) {
-        float const t = 2*M_PI*(float)n/(float)segments;
+        float const t = 2*MathConstants::M_PI*(float)n/(float)segments;
         glVertex2f(x + sin(t)*r, y + cos(t)*r);
     }
     glEnd();
