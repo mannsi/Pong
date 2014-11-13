@@ -3,7 +3,7 @@ add_compile_options(-std=c++0x) # Use C++ 11 compiler
 cmake_minimum_required(VERSION 2.8.4)
 project(Pong)
 
-set(SOURCE_FILES World.cpp Ball.cpp Stick.cpp BoxShape.h Collision.cpp OpenGlUi.cpp Commands.h KeyMappingStruct.h )
+set(SOURCE_FILES World.cpp Ball.cpp Stick.cpp BoxShape.h Collision.cpp OpenGlUi.cpp Commands.h KeyMappingStruct.h Constants.h)
 add_executable(Pong main.cpp ${SOURCE_FILES})
 
 add_subdirectory(Tests/gtest-1.7.0)
